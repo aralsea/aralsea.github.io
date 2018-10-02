@@ -1,0 +1,322 @@
+\documentclass[dvipdfmx,b5paper,papersize]{jsarticle}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+
+\pagestyle{empty}
+\newtheorem{thm}{Thm.}
+\newtheorem{prop}[thm]{Prop.}
+\newtheorem{cor}[thm]{Cor.}
+\newtheorem{defi}[thm]{Def.}
+\newtheorem{lem}[thm]{Lem.}
+\renewcommand{\abstractname}{}
+\title{ディリクレの算術級数定理の証明}
+\author{荒井勇人(36)\footnote{東京大学教養学部理科三類2年，理学部数学科内定．Twitter:@alskdjfhg9}}
+\date{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+少し前まで\cite{シャカルチ}を読んでいたのですが，有限アーベル群上のフーリエ解析の応用としてディリクレの算術級数定理の証明が載っていたので，読んだついでに記事にしてみました\footnote{この記事は締め切り前日に書いているのですが, 先週PCが故障してしまい休日の朝から大学に来て図書館のMacでひいひい言いながら頑張ってます. 家に帰ってからミスに気づいても直せないので緊張感があります. (追記@家:iPadで編集できました. )}．はるか昔に\cite{高木}を読んだときは雰囲気しか掴めなかったのですが，いまになって読んでみると新しい発見があって面白いです．さて，この記事は予備知識として\cite{アールフォルス}程度の複素解析と，初等整数論および群論の言葉を仮定しますが，証明の本質は$2$章にあるので，そこと見比べながら読むといいかと思います．また\cite{雪江}では本文中で省略した証明や細部の議論がよくまとまっているので，興味のある人は参照してください．
+\end{abstract}
+
+\section{導入}
+素数の無限性についてよく知られている結果として，次の定理があります．
+\begin{thm}
+素数は無限に存在する．
+\end{thm}
+
+\begin{proof}
+ここではオイラーによる解析的な証明を紹介します．
+まず$s>1$に対しゼータ関数$\zeta(s)$を次のように定めます．
+\[
+\zeta(s)=\sum_{n=1}^{\infty}\frac{1}{n^s}
+\]
+このとき以下の等式が成り立ちます．
+\[
+\zeta(s)=\prod_{p:prime}\left(1-\frac{1}{p^s}\right)^{-1}\footnote{すべての素数について積をとります．}
+\]
+これは
+\[
+\frac{1}{1-\frac{1}{p^s}}=1+p^{-s}+p^{-2s}+\cdots
+\]
+として素数についての無限積を展開すると，素因数分解の一意性より各$n$について$n^{-s}$がちょうど一回ずつ現れることからわかります．\footnote{厳密には$\epsilon \mathchar`-\delta$を使います．}
+　$|x|<1$に対し
+\[
+\log(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}-\cdots=x+O(x^2)\footnote{$O(f(x))$は$x \to \infty$のとき$f(x)$の定数倍以下になる項を表します．}
+\]
+だから，
+\begin{align*}
+\log\zeta(s)&=\sum_{p}-\log\left(1-\frac{1}{p^s}\right)\\
+&=\sum_{p}\left(\frac{1}{p^s}+O(p^{2s})\right)\\
+&\leq \sum_{p}\frac{1}{p^s}+\sum_{n=1}^{\infty}O(n^2)\\
+&= \sum_{p}\frac{1}{p^s}+O(1)\end{align*}
+となり，$s\to1+0$のとき左辺は発散するので
+\[
+\sum_{p}\frac{1}{p}=\infty
+\]
+となります．素数が有限個ならこの値は収束するはずなので，無限個あるとわかります．
+\end{proof}
+ディリクレはこの証明の手法を応用して，以下の定理を示しました．\footnote{これが整数論に解析を応用する，解析的整数論のはじまりと言われています．}
+
+\begin{thm}[ディリクレの算術級数定理]
+$a$と$b$が互いに素な整数で$a\neq0$のとき，$an+b$型の素数が無限に存在する．
+\end{thm}
+証明のアイデアとしては，
+\[
+\sum_{p\equiv b\pmod{a}}\frac{1}{p}
+\]
+という形の級数を考え，これが発散することを示すというものです．具体的な$a$，$b$でのイメージ的な証明を先に見てから，
+厳密な証明に入っていきましょう．
+
+\section{$p\equiv 1,3\pmod{4}$のとき}
+\begin{prop}
+\[
+S_1=\sum_{p\equiv1 \pmod{4}}\frac{1}{p}
+\]
+\[
+S_2=\sum_{p\equiv3 \pmod{4}}\frac{1}{p}
+\]
+とおくと，これらは発散する．
+\end{prop}
+\begin{proof}
+関数$\chi_{0}$，$\chi_{1}$を以下で定めます．
+\[
+\chi_{0}(n)=\begin{cases}
+1 & nと4が互いに素なとき \\
+0 & {\rm otherwise}
+\end{cases}
+\]
+\[
+\chi_{1}(n)=\begin{cases}
+1 & n\equiv 1\pmod{4}\\
+-1 & n\equiv 3\pmod{4} \\
+0 & {\rm otherwise}
+\end{cases}
+\]
+このとき
+\[
+S_1=\frac{1}{2}\left(
+\sum_{p}\frac{\chi_{0}(p)}{p}+\sum_{p}\frac{\chi_{1}(p)}{p}
+\right)
+\]
+\[
+S_2=\frac{1}{2}\left(
+\sum_{p}\frac{\chi_{0}(p)}{p}-\sum_{p}\frac{\chi_{1}(p)}{p}
+\right)
+\]
+とかけます．ここで
+\[
+\sum_{p}\frac{\chi_{0}(p)}{p}=\sum_{p\neq 2}\frac{1}{p}=\infty
+\]
+より
+\[
+\sum_{p}\frac{\chi_{1}(p)}{p}
+\]
+が有界であることを示せば十分です．\\
+全ての整数$m$，$n$に対し
+\[
+\chi_{1}(mn)=\chi_{1}(m)\chi_{1}(n)
+\]
+が成り立つ（完全乗法的である）ので，$\zeta(s)$のときと同様に
+\begin{align*}
+\sum_{n=1}^{\infty}\frac{\chi_{1}(n)}{n}
+&=\prod_{p}\left(1+\frac{\chi_{1}(p)}{p}+\frac{\chi_{1}(p)^2}{p^2}+\dotsb\right)\\
+&=\prod_{p}\left(1-\frac{\chi_{1}(p)}{p}\right)^{-1}
+\end{align*}
+となります．ここで
+\begin{align*}
+(左辺)&=1-\frac{1}{3}+\frac{1}{5}-\frac{1}{7}+\dotsb \\
+&=\frac{\pi}{4}
+\end{align*}
+より\footnote{ライプニッツ級数．}．対数をとると
+\begin{align*}
+\log{\frac{\pi}{4}}&=\sum_{p}-\log \left(1-\frac{\chi_{1}(p)}{p} \right)\\
+&=\sum_{p} \left(\frac{\chi_{1}(p)}{p}+O(\frac{1}{p^2}) \right)\\
+&=\sum_{p}\frac{\chi_{1}(p)}{p}+O(1)
+\end{align*}
+つまり$\sum_{p}\chi_{1}(p)/p$は有界です．
+\end{proof}
+\begin{cor}
+$4n+1$，$4n+3$型の素数はそれぞれ無限に存在する．
+\end{cor}
+
+\section{一般の場合}
+この節を通して$a$，$b$は固定された整数とします（ただし$a\neq 0$，$(a,b)=1$を満たす）．また無限和や無限積の計算および正当化はある程度省略します．$p\equiv 1,3\pmod{4}$のときと証明は同様ですが，そのためにまずディリクレ指標および$L$関数を定義します．
+\begin{defi}[指標]
+有限アーベル群$G$に対し，$G$から$S^1=\{z\in \mathbb{C} \mid |z|=1\}$への群準同型 \footnote{$g_1,g_2\in G$に対し$e(g_1\cdot g_2)=e(g_1)e(g_2)$をみたす写像のこと．}
+\[
+e:G \to S^1
+\]
+を指標という．また，
+\[
+\widehat{G}=\{e:G \to S^1 \mid eはGの指標\}
+\]
+とし，$e_1,e_2\in \widehat{G}$に対しその積を
+\[
+e_1\cdot e_2:G\ni g \mapsto e_1(g)e_2(g)\in S^1
+\]
+と定めると$\widehat{G}$はアーベル群となる．これを$G$の指標群，双対群という．
+\end{defi}
+有限生成アーベル群の構造定理などより，$|\widehat{G}|=|G|$となることがわかり，$\widehat{G}$は有限群となります．指標を拡張してディリクレ指標が定義されます．
+\begin{defi}[ディリクレ指標]
+$(\mathbb{Z}/a\mathbb{Z})^\times$\footnote{$\mathbb{Z}/a\mathbb{Z}$の乗法群，つまり$a$と互いに素な整数を$a$で割った余りに通常の積を入れて群と見たもの．}の指標$e$により
+\[
+\chi(n)=\begin{cases}
+e(n) & (n,a)=1\\
+0 &{\rm otherwise}
+\end{cases}
+\]
+と表せる関数$\chi : \mathbb{Z} \to S^1$を，$a$を法とするディリクレ指標，または単にディリクレ指標という．ただし$(n,a)$は$n$と$a$の最大公約数を表す．特に
+\[
+\chi(n)=\begin{cases}
+1 & (n,a)=1\\
+0 & {\rm otherwise }
+\end{cases}
+\]
+というディリクレ指標を自明な指標といい，$\chi_0$で表す．
+\end{defi}
+前節の$\chi_0$，$\chi_1$はディリクレ指標です．これで$L$関数が定義できます．
+\begin{defi}[$L$関数]
+ディリクレ指標$\chi$に対し，
+\[
+L(s,\chi)=\sum_{n=1}^\infty \frac{\chi(n)}{n^s} \qquad ({\rm Re} s>1)
+\]
+と定め，ディリクレの$L$関数という．
+\end{defi}
+右辺は${\rm Re} s>1$で広義一様収束するので，ワイエルシュトラスの二重級数定理より正則関数となります．変数$s$は複素数ですが，慣れない方は実数と思って読んでも大丈夫です．さて，$p\equiv 1,3\pmod{4}$のときの証明のように，
+\[
+\sum_{p\equiv b\pmod{a}}\frac{1}{p}
+\]
+という和をディリクレ指標を使って分解したいのですが，それを主張するのが次の命題です．
+\begin{prop}
+$a$と$b$が互いに素な整数で$a\neq0$のとき，
+\[
+\delta_b(n)=\begin{cases}
+1 & n\equiv b \pmod a\\
+0 & {\rm othewise}
+\end{cases}
+\]
+という関数$\delta_b:\mathbb{Z} \to S^1$に対し．
+\[
+\delta_b(n)=\frac{1}{\phi (a)} \sum_{\chi} \overline{\chi(b)} \chi(n)
+\]
+が成り立つ．ただし$\phi$はオイラー関数\footnote{$\phi(a)$は$a$と互いに素な$1$以上$a$未満の整数の個数．}で，和はディリクレ指標全体にわたってとる．
+\end{prop}
+\begin{proof}
+有限アーベル群上のフーリエ変換の理論からわかる．あるいは右辺を直接計算してもよい．
+\end{proof}
+$a$と$b$が互いに素という条件を使うのはここだけです．この命題より，前節と同様に
+\begin{align*}
+\sum_{p\equiv b\pmod{a}}\frac{1}{p^s}&=\sum_{p}\frac{\delta_b(p)}{p^s}\\
+&=\sum_{p}\frac{1}{p^s} \left ( \frac{1}{\phi(a)} \sum_{\chi}\overline{\chi(b)} \chi(n) \right)\\
+&=\frac{1}{\phi(a)} \left( \sum_p \frac{\chi_{0}(p)}{p^s}+ \sum_{\chi \neq \chi_{0}}\overline{\chi(b)}\sum_p \frac{\chi(p)}{p^s} \right) \tag{1}
+\end{align*}
+となるので，$\sum_p {\chi(p)}/{p^s}$の$s \to 1+0$での振る舞いを調べれば良いことがわかります．ディリクレ指標についての和は，指標群が有限群であることから有限和であることに注意しましょう．まずは自明な指標の部分についてです，
+\begin{prop} \label{0}
+\[
+\sum_p \frac{\chi_{0}(p)}{p^s} \to \infty \qquad (s \to 1+0) \tag{2}
+\]
+\end{prop}
+\begin{proof}
+\[
+\sum_p \frac{\chi_{0}(p)}{p^s}=\sum_{p \nmid a} \frac{1}{p^s}
+\]
+であり，有限個（$a$の素因数）を除き$p \nmid a$だから，$s \to 1+0$のとき$\zeta(s) \to \infty$であることと合わせて主張を得る．
+\end{proof}
+次に自明でない指標の部分ですが．やはり前節と同様に$\log L(s,\chi)$を使って評価していきます．複素数の対数なので注意が必要ですが，適当な枝をとって議論していきます，$\log$で扱いやすいように$L(s,\chi)$を無限積で表示しておきます．
+\begin{thm}[オイラー積]\footnote{$\zeta$や$L$を含むより一般の状況でも同様の等式が成り立ちます．}
+\[
+L(s,\chi)=\prod_{p}\left(1-\frac{\chi(p)}{p^s}\right)^{-1} \qquad ({\rm Re} s>1)
+\]
+\end{thm}
+\begin{proof}
+$m,n \in \mathbb{Z}$に対し$\chi(mn)=\chi(m)\chi(n)$に注意すれば
+\[
+\zeta(s)=\prod_{p}\left(1-\frac{1}{p^s}\right)^{-1}
+\]
+と同様にわかる．
+\end{proof}
+次の定理はあとで使うのですが，先に掲げておきます．$L$関数の定義域が拡張されることを表します．
+\begin{thm} \label{解析接続}
+$\chi \neq \chi_{0}$のとき$L(s,\chi)$は$\mathbb{C}$上正則に解析接続される．
+また$L(s,\chi_{0})$は$\mathbb{C}$上有理型に解析接続され，唯一$s=1$に$1$位の極をもつ．
+\end{thm}
+\begin{proof}
+略．
+\end{proof}
+
+$\log L(s,\chi)$によって$\sum_p {\chi(p)}/{p^s}$を評価したのが次の命題です．
+\begin{prop} \label{log}
+$\chi \neq \chi_{0}$のとき，${\rm Re}s>1$において適当な$\log$の枝をとれば
+\[
+\log L(s,\chi)=\sum_p \frac{\chi(p)}{p^s}+R_{\chi}(s)
+\]
+と書ける．ただし$R_{\chi}(s)$は${\rm Re}s>1/2$で正則，特に$s=1$の近くで有界である．
+\end{prop}
+\begin{proof}
+$\log (1+z)$の$z=0$でのテイラー展開を考えると，$|z|<1$のとき
+\[
+\exp \left(\sum_{k=1}^{\infty} \frac{z^k}{k}\right)=\frac{1}{1-z}
+\]
+である．$z=p^s$として$p$について積をとれば
+\[
+\exp \left(\sum_{p} \sum_{k=1}^{\infty} \frac{1}{k} \frac{\chi(p^k)}{p^{ks}} \right)=L(s,\chi)
+\]
+左辺の指数の中身を$k=1$とそれ以外に分けて計算すれば，求める式を得る．\footnote{実はここの計算と収束，和の交換の確認がかなりめんどくさいです．\cite{雪江}に詳しく書いてあります．}
+\end{proof}
+この命題より，$\sum_p {\chi(p)}/{p^s}$の$s \to 1+0$で発散するかどうかは，（$R_{\chi}(s)$が$s=1$のまわりで有界であることから）$L(1,\chi)$の値が$0$かどうかによって決まります．（Thm.\ref{解析接続}によりこの値は存在します．）式$(1)$，$(2)$をみると，$\chi \neq \chi_{0}$のとき$s \to 1+0$で$\sum_p {\chi(p)}/{p^s}$が有界であることを示せば十分です．そのために$L(1,\chi) \neq 0$を示しましょう．
+\begin{lem} \label{フーリエ}
+\[
+\sum_{\chi} \chi(n)=\begin{cases}
+\phi(a) & n \equiv 1\pmod{a}\\
+0 & {\rm otherwise}\\
+\end{cases}
+\]
+\end{lem}
+\begin{proof}
+略．
+\end{proof}
+\begin{defi}
+$\chi$をディリクレ指標とする．$\chi$が実指標であるとは，$\chi$の値域が実数であることと定め，$\chi$が複素指標であるとは，実指標でないことと定める．
+\end{defi}
+\begin{prop}
+$\chi \neq \chi_{0}$のとき$L(s,\chi)\neq 0$である．
+\end{prop}
+\begin{proof}
+$\chi$が実指標のときは難しいので\footnote{省略しましたが，おそらく証明の中でもっとも難しい部分です．重めな計算が\cite{雪江}，\cite{シャカルチ}に載っています．}，複素指標のときのみ示します．\\
+$\chi$は複素指標とする．$L(1,\chi)=0$と仮定する．
+\[
+F(s)=\prod_{\psi} L(s,\psi)=L(s,\chi_{0})\prod_{\psi \neq \chi_{0}} L(s,\psi)
+\]
+とおく．$\chi$は複素指標だから$\chi \neq \overline{\chi}$であり，$L(1,\overline{\chi})=\overline{L(1,\chi)}=0$となる．よって$\prod_{\psi \neq \chi_{0}} L(s,\psi)$は$s=1$に$2$位以上の零点をもつ．またThm.\ref{解析接続}より$L(s,\chi_{0})$は$s=1$で$1$位の極をもつ．よって$F(1)=0$である．\\
+一方Prop.\ref{log}の証明とLem.\ref{フーリエ}より，${\rm Re}s>1$のとき
+\begin{align*}
+F(s)&=\exp \left(\sum_{\psi} \sum_{p} \sum_{k=1}^{\infty} \frac{1}{k} \frac{\chi(p^k)}{p^{ks}} \right)\\
+&=\exp \left(\phi(a) \sum_{p^k \equiv 1 \pmod{a}} \frac{1}{k} p^{-ks} \right)\\
+&\geq \exp(0)\\
+&=1
+\end{align*}
+となり$F$の連続性に矛盾する．よって$\chi \neq \chi_{0}$のとき$L(1,\chi) \neq 0$である．
+\end{proof}
+\begin{cor} \label{n0}
+$s \to 1+0$のとき$\sum_p {\chi(p)}/{p^s}$は有界である．
+\end{cor}
+以上で算術級数定理が証明されます．
+\begin{thm}[ディリクレの算術級数定理]
+$a$と$b$が互いに素な整数で$a\neq0$のとき，$an+b$型の素数が無限に存在する．
+\end{thm}
+\begin{proof}
+\[
+\sum_{p\equiv b\pmod{a}}\frac{1}{p^s}=\frac{1}{\phi(a)} \left( \sum_p \frac{\chi_{0}(p)}{p^s}+ \sum_{\chi \neq \chi_{0}}\overline{\chi(b)}\sum_p \frac{\chi(p)}{p^s} \right)
+\]
+において$s \to 1+0$とすると，Prop.\ref{0}より$\sum_p {\chi_{0}(p)}/{p^s} \to \infty$であり，Cor.\ref{n0}およびディリクレ指標についての和が有限和であることより，$\chi \neq \chi_{0}$の部分は有界にとどまる．よって両辺は無限大に発散し，とくに$\sum_{p\equiv b\pmod{a}}1/p=\infty$である．
+\end{proof}
+\begin{thebibliography}{2}
+\bibitem{雪江} 雪江明彦，『整数論3: 解析的整数論への誘い』，日本評論社，2014．
+\bibitem{シャカルチ} エリアス.M.スタイン，ラミ・シャカルチ，『フーリエ解析入門 (プリンストン解析学講義)』，新井ほか訳，日本評論社，2007．
+\bibitem{アールフォルス} L.V.アールフォルス，『複素解析』，笠原乾吉訳，現代数学社，1982．
+\bibitem{高木} 高木貞治，『初等整数論講義』，共立出版，1971
+\end{thebibliography}
+\end{document}
