@@ -1,0 +1,154 @@
+\documentclass[dvipdfmx,b5paper,papersize]{jsarticle}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+
+
+
+\pagestyle{empty}
+\theoremstyle{definition}
+\newtheorem{thm}{Thm.}
+\newtheorem{prop}[thm]{Prop.}
+\newtheorem{cor}[thm]{Cor.}
+\newtheorem{defi}[thm]{Def.}
+\newtheorem{lem}[thm]{Lem.}
+\newtheorem{rem}[thm]{Rem.}
+\newtheorem{ex}[thm]{Ex.}
+\newtheorem{fact}[thm]{Fact.}
+\renewcommand{\abstractname}{}
+\renewcommand{\theenumi}{(\arabic{enumi})}
+\title{複素解析4講義ノート（4/16日分）}
+\author{荒井勇人}
+\date{}
+
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+
+
+\end{abstract}
+
+\section{直線束の導入}
+$\wp$関数などの$\mathbb{C}$上の楕円関数は複素トーラス$\mathbb{C}/\Omega$上の有理型関数と見なせるのであった．ここで$\mathbb{C}$上の有理型関数は整関数の比で書けることを思い出すと，楕円関数も整関数の比で書きたいというモチベーションが生まれる．特に$\vartheta$関数から様々な楕円関数が得られたことから，$\vartheta$関数を$\mathbb{C}/\Omega$上の整関数として捉えられれば有用であるように思える．しかし一般にコンパクトリーマン面上の正則関数は定数に限るので，それは不可能である．そこで直線束の概念を導入し，その正則切断として$\vartheta$関数を捉える．
+
+
+\begin{defi}
+  複素多様体$X$上の正則直線束(holomorphic line bundle)とは，複素多様体$L$と正則写像$\pi \colon L \to X$の組$(L,\pi)$であって次の条件を満たすもののこと．
+  \begin{enumerate}
+    \item 任意の$x\in X$について$\pi^{-1}(x)$は$1$次元複素ベクトル空間．
+    \item 任意の$x\in X$についてある開近傍$U$と同相写像
+    $\varphi_U \colon \pi^{-1}(U) \xrightarrow{\sim} U \times \mathbb{C}$
+    があり，これにより$\pi$は自然な射影
+    $U\times \mathbb{C} \to U$
+    に対応する．
+    \item 任意の$\varphi_U$,$\varphi_V$に対して$U \cap V$上の零点を持たない正則関数$g_{VU}$があり
+    \[
+    \varphi_V \circ \varphi_U^{-1} \colon (U \cap V)\times \mathbb{C} \longrightarrow (U \cap V)\times \mathbb{C}, \hspace{15pt} (x,v) \longmapsto (x,g_{VU}(x))
+    \]
+    と書ける．
+  \end{enumerate}
+  このとき$g_{VU}$を変換関数，$\vatphi_U$を局所自明化という．
+
+  また，$X$上の直線束の射は正則写像であって$X$への射影と可換なものと定める．同型などはその圏で考える．
+\end{defi}
+
+\begin{rem}
+  直線束の定義で$U\times \mathbb{C}$の代わりに$U\times \mathbb{C}^n$をとり，$U \cap V$上の零点を持たない正則関数の代わりに$U \cap V$から$GL_n(\mathbb{C})$への正則写像をとったものを（複素）ベクトル束という．
+\end{rem}
+
+直線束$\pi \colon L \to X$があったとき変換関数系$\{g_{VU}\}_{U,V}$はcocycle condition
+\begin{enumerate}
+  \item $g_{UU}={\operatorname{id}}$
+  \item $g_{WU}=g_{WV}\circ g_{VU}$
+\end{enumerate}
+を満たす．逆に$X$の開被覆$\{U_i\}$と$U_i \cap U_j$上のcocycle conditionを満たす正則関数の族$\{g_{ij}\}$が与えられたとき，これを変換関数系にもつような$X$上の直線束が構成できる．
+
+\begin{defi}
+  直線束$\pi \colon L \to X$の開集合$U \subset X$上の正則切断(holomorphic section)とは，正則写像$s \colon U \to \pi^{-1}(U)$であって$\pi \circ s={\operatorname{id}}_U$となるもののこと．また$U$上の正則切断全体の成す複素ベクトル空間を$\Gamma(U,L)$とかく．
+\end{defi}
+
+\begin{rem}
+  対応$U \mapsto \Gamma(U,L)$は層である．
+\end{rem}
+
+さて，$\vartheta$関数とは$\vartheta(z;p)=\sum_{j \in \mathbb{Z}} (-1)^j p^{j(j-1)/2} z^j$で定義されていた．
+
+
+
+
+以下のように状況を設定する．
+$\tau \in \mathbb{C}$, $\operatorname{Im} \tau >0$とし$\Omega=\mathbb{Z}+\mathbb{Z}\tau$を$\mathbb{C}$のlatticeとする．また$p=\exp{(2\pi i\tau)}$, $\mathbb{C}^*=\mathbb{C}\backslash \{0\}$とし，単射群準同型$\mathbb{Z} \to \mathbb{C}; n \mapsto p^n$により$\mathbb{Z} \subset \mathbb{C}$とみなして
+\[
+\mathbb{C}/\Omega \cong \mathbb{C}^*/\mathbb{Z}=X, \hspace{15pt} u \longmapsto e^{2\pi i u}
+\]
+により$X$を定義する．そして直線束$\pi \colon L \to X$を次のように定める．すなわち$\mathbb{C}^* \times \mathbb{C}$上の同値関係$\sim$を$(z,v)\sim (pz,-v/z)$の生成するものとし，$L=(\mathbb{C}^* \times \mathbb{C})/{\sim}$とする．そして$\pi \colon L \to \mathbb{C}^*/\mathbb{Z} \cong X$を自然な射影とする．
+
+
+\begin{prop}
+  このように構成した$\pi \colon L \to X$は$X$上の直線束である．
+\end{prop}
+\begin{proof}
+これが直線束であることを示すために，局所自明化を作る．
+$A(r,R)=\{z \in \mathbb{C}\mid r<|z|<R\}$とし，自然な射影$f \colon \mathbb{C}^* \to \mathbb{C}^*/\mathbb{Z}$による$A(|p|^{2/3},1)$, $A(|p|^{1/3},|p|^{-1/3})$, $A(1,|p|^{-2/3})$の像をそれぞれ$U_{-}$, $U_0$, $U_{+}$と定める．（$|p|<1$と$U$たちが開集合であることに注意する．）これらは$X$の開被覆である．
+これらの上で$L$は自明だから直線束である．．
+\end{proof}
+
+$U_{-}$, $U_0$, $U_{+}$上の自然な座標をそれぞれ$z_{-}$, $z_0$, $z_{+}$とすると，$z_{-}=z_0$, $z_0=z_{+}$, $z_{-}=pz_{+}$である．そこで各$U$上で$\vartheta$関数を考えると$U_{-} \cap U_{+}$上で$\vartheta(z_{-})=\vartheta(pz_{+})=-\vartheta(z_{+})/z_{+}$となり，これらは$L$の定義より貼りあって正則切断$z \to (z,\vartheta(z))$を定める．
+
+結局，$\vartheta$関数は直線束$\pi \colon L \to X$の正則切断とみなせた．
+
+さらに正則切断から有理型関数を次のようにして作ることができる．二つの正則切断が各局所自明化$U$上で$s_U$, $t_U$とかけているとする．このとき$f_U=s_U/t_U$は貼りあって$X$上の有理型関数を定める．これにより$\vartheta$関数から$X=\mathbb{C}/\Omega$上の有理型関数が作れる．
+\section{因子と直線束}
+
+直線束と密接に関係した概念である因子を導入する．
+
+\begin{defi}
+  $X$をコンパクト複素多様体とする．
+  \begin{enumerate}
+    \item $X$の余次元$1$の既約解析的集合全体が生成する自由アーベル群を$\operatorname{Div}X$とかき，その元を因子(divisor)という．
+
+    \item $D_k \subset X$を余次元$1$の既約解析的集合とし，$D= \sum_k m_k D_k$を因子とする．$m_k$が全て正のとき，$D$は有効(effictive)という．
+
+    \item 因子$D= \sum_k m_k D_k$に対し$\operatorname{Supp}D =\cup_{m_k \neq 0}D_k$を$D$の台という．
+\end{enumerate}
+\end{defi}
+
+因子と有理型関数，直線束の関係を考える．$D=\sum_k m_k_D_k$を因子とし，$X$の開被覆$\{U_i\}_i_$と正則関数の族$\{f_{ki}\}_{k,i}$で$D_k \cap U_i=\{z \in U_i \mid f_{ki}(z)=0\}$となるものをとる．
+
+まず$U_i$上の有理型関数$f_i$を$f_i= \prod_k f_{ki}^{m_k}$と定める．実はうまく$\{f_{ki}\}_{k,i}$をとると$f_i$と$f_j$は$U_i \cap U_j$上での極と零点が重複度込みで一致し，$g_{ij}=f_i / f_j$は$U_i \cap U_j$上で零点を持たない正則関数である．さらに明らかにcocycle conditionを満たすから，これを変換関数系として$X$上の直線束が定まる．
+
+次にピカール群を定義する．．
+\begin{defi}
+  $X$を複素多様体とする．$X$上の直線束の同値類全体はテンソル積を積としてアーベル群を成す．これを$X$のピカール(Picard)群といい，$\operatorname{Pic}X$とかく．
+\end{defi}
+このとき実は次の命題が成り立つ．
+\begin{prop}
+  上で見た因子から直線束を構成する操作は，群準同型$\operatorname{Div}X \to \operatorname{Pic}X$を与える．
+\end{prop}
+
+\begin{proof}
+  略．
+\end{proof}
+
+この射の核を考えよう．
+
+因子$D$がこの射により単位元に行くとする．$\operatorname{Pic}X$の単位元は自明な直線束$X \times \mathbb{C}$によって代表される．これに同型な直線束を与えるような変換関数系$\{g_{ij}\}$は$U_i$上零点を持たない正則関数$h_i$により$g_{ij}=h_i h_j^{-1}$と書ける．このとき$D$からできる$U_i$上の有理型関数$f_i$は，$f_i f_j^{-1}=g_{ij}=h_i h_j^{-1}$より$f_i/h_i=f_j/h_j$を満たし，これにより$\{f_i/h_i\}$は貼り合わさって$X$上の有理型関数を定める．すると$D$は次のようにして$X$上の有理型関数から作られる因子と一致することがわかる．
+すなわち$f$を$X$上の有理型関数としたとき$(f)_0$, $(f)_{\infty}$を$f$の零点，極から定まる因子とし$(f)=(f)_0 -(f)_{\infty}$と定める．このような因子を主因子(principal divisor)という．
+
+よって結局この射の核は主因子全体の成す$\operatorname{Div}X$の部分群$\operatorname{Div}_{pr}X$であることがわかった．実はさらに次が成り立つことが知られている．
+
+\begin{fact}
+  $X$が非特異射影多様体なら$\operatorname{Div}X/\operatorname{Div}_{pr}X \to \operatorname{Pic}X$は同型．
+\end{fact}
+
+$\vartheta$関数が定める因子と直線束を考える．これの$X$での「零点」は$z=1$である．そこでこれを因子だと思って直線束を作る．変換関数は$U_{+} \cap U_{-}$上で$1$，他の部分で$1-z_0$である．これは計算により上で作った直線束$L$と同型であることがわかる．\\
+
+最後に直線束の例を一つ挙げる．
+
+\begin{defi}
+  $X$を複素多様体とする．$X$の座標近傍$U$, $V$に対して$g_{UV}$を$V$から$U$への座標変換関数のヤコビアンとして定めると，これは変換関数系を成す．これに対応する$X$上の直線束を標準束という．また対応する因子の類を標準因子類といい，${\mathcal{K}}_X$とかく．
+\end{defi}
+\end{document}
