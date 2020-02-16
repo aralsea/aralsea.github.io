@@ -1,0 +1,420 @@
+\documentclass[dvipdfmx,b5paper,papersize]{jsarticle}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+
+
+
+\pagestyle{empty}
+\theoremstyle{definition}
+\newtheorem{thm}{Thm.}
+\newtheorem{prop}[thm]{Prop.}
+\newtheorem{cor}[thm]{Cor.}
+\newtheorem{defi}[thm]{Def.}
+\newtheorem{lem}[thm]{Lem.}
+\newtheorem{rem}[thm]{Rem.}
+\newtheorem{ex}[thm]{Ex.}
+\newtheorem{fact}[thm]{Fact.}
+\newtheorem{prop-def}[thm]{Prop-Def.}
+
+
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\id}{id}
+
+
+\renewcommand{\abstractname}{}
+\renewcommand{\theenumi}{(\arabic{enumi})}
+\renewcommand{\labelenumi}{(\arabic{enumi})}
+
+
+\title{無限次ガロア理論}
+\author{荒井勇人\footnote{東大理学部数学科B3．twitter:@alskdjfhg9．}}
+\date{2020.01.30}
+
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+代数方程式の解の公式の研究から生まれた，ガロア理論という分野があります．五次以上の代数方程式が冪根による解の公式を持たないことがガロア理論により示されますが，ガロア理論そのものは体の拡大の中間体と群の部分群の対応として抽象的に定式化されるものです．今回の記事では，入門書の多くにガロア理論として書かれている「有限次ガロア理論」を前提に，より一般の無限次ガロア理論を紹介します．
+
+\end{abstract}
+
+
+
+\section{有限次ガロア理論}
+無限次の話を始める前に，有限次ガロア理論を復習しておきましょう．詳しくは\cite{雪江}を参照してください．
+\begin{defi}
+  $L/K$を体の代数拡大，$\overline{K}$を$K$の代数閉包とする．
+  \begin{enumerate}
+    \item $L$が$K$ベクトル空間として有限次元のとき，$L/K$を有限次拡大という．
+    \item $\alpha \in L$の$K$上の最小多項式$f \in K[X]$が$\overline{K}$で重根を持たないとき，$\alpha$は$K$上分離的であるという．
+    \item $L$の全ての元が$K$上分離的なとき，$L/K$を分離拡大という．
+    \item 全ての$\alpha \in L$に対し，$\alpha$の$K$上の共役元が全て$L$に含まれるとき，$L/K$を正規拡大という．
+    \item $L/K$が分離拡大かつ正規拡大のとき，ガロア拡大という．
+    \item $L/K$がガロア拡大のとき，$L$の$K$代数としての自己同型全体のなす群$\Aut_K L$を$\Gal(L/K)$と書き，$L/K$のガロア群という．
+    \item $L$の体としての自己同型全体のなす群$\Aut L$とその部分群$H$に対し，$L^H=\{\alpha \in L \mid \text{全ての$\sigma \in H$について$\sigma(\alpha)=\alpha$}\}$は$L$の部分体になる．これを$H$の不変体という．
+
+  \end{enumerate}
+
+\end{defi}
+
+\begin{prop}\label{thm:normal}
+  代数拡大$L/K$に対し，以下は同値．
+  \begin{enumerate}
+    \item $L/K$は正規拡大．
+    \item 全ての$\sigma \in \Hom_K(L,\overline{K})$について，$\sigma(L) \subset L$．
+    \item 全ての$\sigma \in \Hom_K(L,\overline{K})$について，$\sigma(L) = L$．
+  \end{enumerate}
+\end{prop}
+
+\begin{thm}[有限次ガロア理論]\label{thm:finite_galois_theory}
+  $L/K$を有限次ガロア拡大，$G=\Gal(L/K)$とする．
+  $\mathcal{M}$を$L/K$の中間体全体の集合，$\mathcal{H}$を$G$の部分群全体の集合とする．このとき
+  \begin{eqnarray*}
+  &\Phi \colon \mathcal{M} \to \mathcal{H},&\hspace{15pt} M \mapsto \Gal(L/M)\\
+  &\Psi \colon \mathcal{H}\to \mathcal{M},&\hspace{15pt} H \mapsto L^H
+\end{eqnarray*}
+  は互いに逆写像である．
+  さらにこれにより中間体$M$と部分群$H$が対応するとき，$M/K$がガロア拡大であることと$H$が$G$の正規部分群であることは同値であり，このとき自然に
+  \[
+  \Gal(M/K) \cong G/H
+  \]
+  となる．
+\end{thm}
+
+\begin{thm}[推進定理]\label{thm:translation}
+  $L/K$を体の拡大，$M$, $N$を中間体とし，$MN=L$かつ$M \cap N=K$だとする．
+  \begin{enumerate}
+    \item $M/K$が有限次ガロア拡大なら$L/N$もそうで，
+    \[
+    \Gal(L/N) \cong \Gal(M/K)
+    \]
+    である．
+    \item $M/K$, $N/K$が有限次ガロア拡大なら$L/K$もそうで，
+    \[
+    \Gal(L/K) \cong \Gal(M/K) \times \Gal(N/K)
+    \]
+    である．
+  \end{enumerate}
+\end{thm}
+
+\begin{ex}
+  $K=\mathbb{Q}$, $L=\mathbb{Q}(\sqrt{2},\sqrt{3})$とすると$L/K$は有限次ガロア拡大で，$\Gal(L/K) \cong \mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}/2\mathbb{Z}$である．よって$\Gal(L/K)$は五つの部分群を持ち，対応して五つの中間体$K=\mathbb{Q}, \mathbb{Q}(\sqrt{2}), \mathbb{Q}(\sqrt{3}), \mathbb{Q}(\sqrt{6}), L=\mathbb{Q}(\sqrt{2},\sqrt{3})$を持つ．
+\end{ex}
+
+このように有限次ガロア拡大においては中間体とガロア群の部分群が対応します．では無限次ガロア拡大でも中間体と部分群は対応するかというとそうではなく，次のような例があります．
+\begin{ex}\label{thm:infinite_galois_example}
+  $p$を素数，$l$を奇素数とする．$i$を$0$以上の整数として$K_i=\mathbb{F}_{p^{l^i}}$, $K=K_0=\mathbb{F}_p$, $L=\bigcup_{i=0}^{\infty} K_i$とおく．$K_i=\{x\in \overline{K} \mid x^{p^{l^i}}}-x=0\}$より$L/K$は正規拡大．$K$は有限体だから$L/K$は分離拡大．よって$L/K$はガロア拡大で，無限次拡大でもある．$G=\Gal(L/K)$とし$\varphi \in G$を
+  \[
+  \varphi \colon L \to L,\hspace{15pt} x \mapsto x^p
+  \]
+  と定めるとwell-definedである（Frobenius準同型という）．$H$を$\varphi$が生成する$G$の部分群とする．このとき$K=\{x \in L \mid x^p -x=0\}=L^H$である．しかし実は$H \subsetneq G$であることが次のように示せる．
+
+  $k_i=1+l+ \dots +l^{i-1}$とおくと，$\varphi^{k_{i+1}} \lvert_{K_i}=\varphi^{k_i} \lvert_{K_i}$を満たす．よって$\sigma \in G$を$K_i$上で$\varphi^{k_i}$となるよう定めることができる．これが$H$に入らないことを示す．入ったと仮定して$\sigma = \varphi^n, n \in \mathbb{Z}$とする．このとき$K_i$上$\varphi^{k_i}=\sigma=\varphi^n$となるから，$K_i$と$\varphi$の定義より$k_i \equiv n \bmod l^i$が全ての$i$で成り立つ．すると$(l-1)n \equiv -1 \bmod l^i$となり結局$(l-1)n=-1$．$l$は奇素数だからこれは不可能である．よって$H \subsetneq G$である．
+
+  したがってこの場合有限次ガロア理論の主張はそのままでは成り立たない．
+\end{ex}
+
+このように無限次ガロア拡大においては単純に中間体と部分群が対応するわけではありません．では上の例で何がうまくいかなかったかというと，異なる部分群が同じ不変体を定めているということです．そこで，部分群の方に何らかの制限を加えて個数を減らしてやればうまくいくのではないかという考えに至ります．具体的にはガロア群に位相を入れて閉部分群のみを考えていきます．
+
+\section{profinite群}
+この節ではprofinite群を定義し，その性質を調べていきます．次節でガロア群に位相を導入して調べるときに使う結果が述べてあります．圏論の知識があると読みやすいかもしれません．
+\begin{defi}
+  $G$を群とする．$G$が位相空間で，積および逆元をとる写像
+  \begin{eqnarray*}
+    &\cdot& \colon G \times G \to G,\hspace{15pt} (g,h) \mapsto gh \\
+    &(\cdot)^{-1}& \colon G \to G,\hspace{15pt} g \mapsto g^{-1}
+  \end{eqnarray*}
+  が連続になるとき，$G$を位相群という．
+  位相群$G$と$H$の間に同相な群同型があるとき，同型であるという．
+\end{defi}
+
+\begin{defi}[射影系]
+  $I$を半順序集合とし，全ての$i, j \in I$に対しある$k \in I$が存在して$i, j \leq k$が成り立つとする．このとき$I$で添字づけられた群の族$(G_i)_{i \in I}$と，$\{(i,j) \in I \times I \mid i \leq j\}$で添字づけられた群準同型の族$(\varphi_{ij} \colon G_j \to G_i})$の組$(G_i, \varphi_{ij})$であって，$i \leq j \leq k$のとき$\varphi_{ij}\circ \varphi_{jk}=\varphi_{ik}$を満たすものを，（$I$で添字づけられた）群の射影系という
+
+  同様にして位相空間と連続写像により位相空間の射影系を，位相群と連続群準同型により位相群の射影系を定める．\footnote{より一般に圏$\mathcal{C}$上の射影系を考えることができます．}
+
+\end{defi}
+
+\begin{defi}[射影極限]
+$(G_i, \varphi_{ij})$を群の射影系とする．次の性質（普遍性という）を満たす群と群準同型の族の組$(\lim G_i, \varphi_i)$が存在するとき，それをこの射影系の射影極限という．
+
+\begin{enumerate}
+  \item $\varphi_i \colon \lim G_i \to G_i$で，$i \leq j$のとき$\varphi_i = \varphi_{ij} \circ \varphi_j$を満たす．
+  \item 群と群準同型の族の組$(H, \psi_i \colon H \to G_i)$が，$i \leq j$のとき$\psi_i = \psi_{ij} \circ \psi_j$を満たすとする．このとき群準同型$\psi \colon H \to \lim G_i$で，任意の$i$について$\psi_i = \varphi_i \circ \psi$を満たすようなものが一意に存在する．
+\end{enumerate}
+
+同様に位相空間と連続写像，位相群と連続群準同型を使って位相空間，位相群の射影極限を定義する．\footnote{こちらも一般に圏$\mathcal{C}$上の射影極限を考えることができます．}
+
+\end{defi}
+
+このようなものが実際に存在するか，また存在したとして簡単な構成があるかは非自明ですが，幸いにも群，位相空間，位相群の場合は次のような簡単な構成が存在します．
+\begin{prop}
+  群の射影系$(G_i, \varphi_{ij})$についてその射影極限は存在し，次で与えられる．
+  \[
+  \lim G_i=\{(x_i)_i \in \prod_i G_i \mid \text{$i \leq j$のとき$x_i = \varphi_{ij}(x_j)$}\}
+  \]
+  \[
+  \varphi_i \colon \lim G_i \to G_i,\hspace{15pt} (x_i)_i \mapsto x_i
+  \]
+  位相空間，位相群でも同じ構成により射影極限が得られる．ただし$\lim G_i$には$\prod_i G_i$の直積位相からの相対位相を入れる．
+\end{prop}
+\begin{proof}
+  群，位相空間の場合は認めて位相群の場合のみ示す．
+
+  まず$\prod_i G_i$は直積位相により位相群となることが簡単に確かめられる．すると$\lim G_i$は位相群$\prod_i G_i$の部分群だから相対位相により位相群となる．$\varphi_i$が連続群準同型で射影極限の定義(1)を満たすのは明らか．
+
+  次に射影極限の定義(2)における$(H, \psi_i)$を任意にとる．$\lim G_i$は$G_i$たちの群としての射影極限だから，射影極限の定義(2)のような群準同型$\psi \colon H \to G$が一意に存在する．一方これは，$\lim G_i$を$G_i$たちの位相空間としての射影極限と見たときに，射影極限の定義(2)により存在する写像でもあるから連続である．よって$\lim G_i$は$G_i$たちの位相群としての射影極限である．
+\end{proof}
+以降単に$\lim G_i$, $\varphi_i \colon \lim G_i \to G_i$と書いたときはこの構成をとるものとする．
+\begin{defi}[profinite群]
+  位相群$G$は，離散位相の入った有限群のある射影系$(G_i, \varphi_{ij})$の，位相群としての射影極限$\lim G_i$と位相群として同型なとき，profinite群（副有限群）という．
+\end{defi}
+
+\begin{ex}\label{thm:l-adic_integer_ring}
+  $l$を素数とすると，$(\mathbb{Z}/l^n\mathbb{Z}, \varphi_n)_{n \in \mathbb{N}}$，ただし
+  \[
+    \varphi_n \colon \mathbb{Z}/l^n\mathbb{Z} \to \mathbb{Z}/l^{n-1}\mathbb{Z},\hspace{15pt} x+l^n\mathbb{Z} \mapsto x+l^{n-1}\mathbb{Z}
+  \]
+  は有限群の射影系．これの射影極限を$\mathbb{Z}_l$と書き，
+$l$進整数環という（位相群構造を延長するような位相環構造が入る）．これは定義よりprofinite群である．
+\end{ex}
+
+\begin{lem}\label{thm:nbd}
+  $(G_i, \varphi_{ij})$を有限群の射影系，$G=\lim G_i$をprofinite群，$\varphi_i \colon G \to G_i$とする．このとき$S=\{\Ker \varphi_i \}_i$は$G$における$1$の基本開近傍系をなす．
+\end{lem}
+\begin{proof}
+  直積位相の定義と$G_i$が離散空間であることより，$\prod_i G_i$における$1$の基本開近傍系として
+  \[
+    U_{i_1 \dots i_t}=\prod_{i \neq i_1, \dots ,i_t}G_i \times \{1\}_G_{{i_1}} \times \dots \times \{1\}_{G{i_t}},\hspace{10pt} \text{$t$は$0$以上の整数，$i_1, \dots ,i_t$は全て異なる}
+  \]
+  の形の開集合の族が取れる．
+  ここで$i_0 \geq i_1, \dots ,i_t$となるように$i_0$をとると，$G$の定義により$G \cap U_{i_0} \subset G \cap U_{i_1 \dots i_t}$となる．$G \cap U_{i_0}=\Ker \varphi_{i_0}$だから$S$は$G$における$1$の基本開近傍系である．
+\end{proof}
+
+$\lim G_i$は位相群だから，$\x \in G$の基本開近傍系として$xS = \{ xU \mid U \in S\}$がとれることに注意しましょう．
+
+\begin{prop}\label{thm:property_of_profinite_topology}
+  profinite群はコンパクトハウスドルフかつ完全不連結\footnote{任意の連結成分が一点集合であるという性質．}である．
+\end{prop}
+\begin{proof}
+  $G_i$を有限群，$G=\lim G_i$をprofinite群とする．
+
+  まず$G_i$は離散位相を考えているのでハウスドルフ．するとその直積$\prod_i G_i$もハウスドルフ．よってその部分空間$G$もハウスドルフ．
+
+  次にコンパクト性を示す．$G_i$は有限群だからコンパクトで，チコノフの定理より$\prod_i G_i$もコンパクト．よって$G$が$\prod_i G_i$の中で閉集合であることを示せば十分．$i \leq j$に対し
+  \begin{eqnarray*}
+  V_{ij}&=&\left\{(x_k)_k \in \prod_k G_k \mid x_i = \varphi_{ij}(x_j)\right\}\\
+  &=& \bigcup_{x_j \in G_j}\left(\prod_{k \neq i, j} G_k \times \{\varphi_{ij}(x_j)\}_{G_i} \times \{x_j\}_{G_j}\right)
+  \end{eqnarray*}
+  は$G_j$が有限集合だから$\prod_k G_k$の閉集合の有限和となり，閉集合である．すると
+  \[
+  G=\bigcap_{i \leq j} V_{ij}
+  \]
+  も閉集合．
+
+  最後に完全不連結であることを示す．$G$は位相群だから，$1$を含む連結成分のみ考えれば良い．$N$を$G$の$1$を含む連結成分とすると，位相群の一般論より$N$は$G$の部分群となる．$N$=$\{1\}$を示す．$U \in S =\{ \Ker \varphi_i \colon G \to G_i\}_i$を任意にとる．$U_N =U\cap N$は空でない$N$の開集合である．また$V_N = \bigcup_{x \in N \backslash U} xU_N$もまた$N$の開集合である．そしてこのとき$N=U_N \sqcup V_N$である．
+
+  実際，$N = U_N \cup V_N$は明らか．また
+  \[
+  U_N \cap V_N \subset U \cap \left(\bigcup_{x \notin U} xU\right) = \bigcup_{x \notin U} \left(U \cap xU\right) =\emptyset
+  \]
+  より$U_N \cap V_N = \emptyset$である（最後の等号は$U$が$G$の部分群であることを使った）．
+  すると$N$は連結なので$N=U_N \subset U$であり，$N \subset \bigcap_{U \in S}U$となるが，$G$はハウスドルフだから右辺は$\{1\}$である．よって$N=\{1\}$である．
+\end{proof}
+
+\section{無限次ガロア理論}
+この節では有限次とは限らないガロア拡大を調べていきます．ガロア群がprofinite群になることを示し，前節の結果を使って主定理を示します．
+\begin{prop-def}
+  $L/K$をガロア拡大とする．包含関係による半順序集合
+  \[
+  B=\left\{M \mid \text{$M$は$L/K$の中間体で$M/K$は有限次ガロア拡大}\right\}
+  \]
+  で添字づけられた有限群の射影系を，
+
+  $M \in B$に対し$G_M =\Gal(M/K)$，$M, M' \in B$で$M \subset M'$のとき
+  \[
+  \varphi_{MM'} \colon G_{M'} \to G_{M}, \hspace{15pt} \sigma \mapsto \sigma \rvert _M
+  \]
+  と定める．このとき自然な射による群の同型
+  \[
+  \Gal(L/K) \cong \lim G_M
+  \]
+  が存在する．これにより$\Gal(L/K)$にprofinite群としての位相群構造を定義する．
+\end{prop-def}
+\begin{proof}
+  群準同型\[
+  \varphi_M \colon \Gal(L/K) \to G_M,\hspace{15pt} \sigma \mapsto \sigma \rvert _M
+  \]により誘導される射を$\varphi \colon \Gal(L/K) \to \lim G_M$とする．すなわち
+  \[
+  \varphi \colon \Gal(L/K) \to \lim G_M,\hspace{15pt} \sigma \mapsto (\sigma \lvert_M)_M
+  \]
+  とする．
+
+  単射性を示す．$\sigma \in Gal(L/K)$とし，全ての$M \in B$について$\sigma \lvert_M =\id_M$だとする．$\alpha \in L$を任意にると，$\alpha$を含む$M \in B$が存在する．実際，$\alpha$の$K$上の共役元全体が生成する$L/K$の中間体$M$をとれば良い．すると
+  \[
+  \sigma (\alpha)=\sigma \lvert_M (\alpha)=\alpha
+  \]
+  となり，$\alpha \in L$は任意だったので$\sigma = \id_L$である．
+
+  全射性を示す．$(\sigma_M)_M \in \lim G_M$を任意にとる．このとき$\sigma \in \Gal(L/K)$を，$\alpha \in L$に対し$\alpha$を含む$M \in B$をひとつとり，$\sigma (\alpha)=\sigma_M (\alpha)$と定めると$\lim G_M$の構成によりwell-definedとなり，$(\sigma_M)_M$の逆像となる．
+\end{proof}
+
+\begin{cor}\label{thm:gal_nbd}
+  $L/K$がガロア拡大のとき，$S=\{\Gal(L/M) \mid M \in B\}$は$\Gal(L/K)$における1の基本開近傍系をなす．
+\end{cor}
+\begin{proof}
+  Lem.\ref{thm:nbd}よりよい．
+\end{proof}
+\begin{rem}\label{thm:finite_discrete_remark}
+  \begin{enumerate}
+    \item $L/K$が有限次ガロア拡大のとき$\Gal(L/K)$に入る位相は離散位相である．これは$\{1\}$の基本開近傍系$S$が$\Gal(L/L)=\{1\}$を含むことと$\Gal(L/K)$が有限集合であることからわかる．特にこのとき任意の部分群は閉部分群である．
+    \item $\sigma, \tau \in \Gal(L/K)$とする．$\sigma$の基本開近傍$\sigma \Gal(M/K) \in \sigma S$について，$\tau \in \sigma \Gal(L/M)$と$\sigma \lvert_M = \tau \lvert_M$は同値である．つまり，大きい中間体$M$で一致しているとき，$\sigma$と$\tau$を近いと思うような位相を考えていることになる．
+  \end{enumerate}
+\end{rem}
+
+\begin{cor}
+  $L/K$がガロア拡大のとき，$\Gal(L/K)$はコンパクトハウスドルフかつ完全不連結である．
+\end{cor}
+\begin{proof}
+  $\Gal{L/K}$はprofinite群だからProp.\ref{thm:property_of_profinite_topology}よりよい．
+\end{proof}
+
+\begin{lem}\label{thm:inclusion_conti}
+  $K \subset M \subset L$を体の拡大とし，$L/K$はガロア拡大だとする．このとき埋め込み$H=\Gal(L/M) \hookrightarrow G=\Gal(L/K)$は，両方にprofinite群としての位相を考えたときに像への同相である．特に$\Gal(L/M)$は$\Gal(L/K)$の閉部分群である．
+\end{lem}
+\begin{proof}
+  連続性を示す．位相群の間の群準同型だから，単位元での連続性を確かめればよい．$1_G$の基本開近傍$\Gal(L/N), N \in B$の引き戻しは
+  \[
+  \Gal(L/M) \cap \Gal(L/N) =\Gal(L/MN)
+  \]
+  であり，推進定理Thm.\ref{thm:translation}よりと$B$の定義より$MN/M$は有限次ガロア拡大である．よって$\Gal(L/MN)$は$1_H$の基本開近傍となるので，連続である．
+  するとこれはコンパクト空間からハウスドルフ空間への連続単射なので閉な像への同相である．
+\end{proof}
+
+\begin{lem}\label{thm:open_subgroup}
+  $L/K$をガロア拡大とする．このとき
+  \[
+  \{\text{$\Gal(L/K)$の開部分群}
+  \}
+  =\{\Gal(L/M) \mid \text{$M$は$L/K$の中間体で$M/K$は有限次拡大}\}
+  \]
+  が成り立つ．
+\end{lem}
+\begin{proof}
+  $G=\Gal(L/K)$とおく．
+
+  まず$L/K$の中間体$M$で$M/K$が有限次拡大であるものを任意にとる．$\tilde{M}$を，$M \subset \tilde{M}$で$\tilde{M}/K$が有限次ガロア拡大となるようにとる．例えば$M=K(\alpha_1, \dots ,\alpha_n)$と表して$\tilde{M}$を$\alpha_i$たちの$K$上の共役元全体が生成する$L/K$の中間体とすればよい．すると
+  \[
+  \Gal(L/\tilde{M}) \subset \Gal(L/M) \subset G
+  \]
+  は部分群の列で，
+  \[
+  \Gal(L/M)=\bigcup_{\sigma \in \Gal(L/M)} \sigma \Gal(L/\tilde{M})
+  \]
+  となる．$\tilde{M}/K$は有限次ガロア拡大だから$\Gal(L/\tilde{M})$は$G$の開集合で，$\sigma$を左からかける写像は$G$の自己同相だから$\sigma \Gal(L/\tilde{M})$は$G$の開集合である．よって$\Gal(L/M)$も$G$の開集合である．部分群なのは明らか．
+
+  次に$H \subset G$を開部分群とする．$H$は$1$の開近傍だからCor.\ref{thm:gal_nbd}よりある$L/K$の中間体$\tilde{M}$があり$\tilde{M}/K$は有限次ガロア拡大で$\Gal(L/\tilde{M}) \subset H$となるものがとれる．このとき定義域の制限による全射準同型$G \to \Gal(\tilde{M}/K)$により，$H$は$\Gal(\tilde{M}/K)$の部分群$H'$に対応する．有限次ガロア理論より$\tilde{M}/K$の中間体$M$があり$H'=\Gal(\tilde{M}/M)$となる．すると
+  \[
+  H=\{\sigma \in G \mid \sigma \lvert_M \}=\Gal(L/M)
+  \]
+  とかける．
+\end{proof}
+
+いよいよ主定理です．
+\begin{thm}[ガロア理論]\label{thm:galois_theory}
+  $L/K$をガロア拡大，$G=\Gal(L/K)$とする．
+  $\mathcal{M}$を$L/K$の中間体全体の集合，$\mathcal{H}$を$G$の閉部分群全体の集合とする．このとき
+  \begin{eqnarray*}
+  &\Phi \colon \mathcal{M} \to \mathcal{H},&\hspace{15pt} M \mapsto \Gal(L/M)\\
+  &\Psi \colon \mathcal{H}\to \mathcal{M},&\hspace{15pt} H \mapsto L^H
+  \end{eqnarray*}
+  は互いに逆写像である．
+  さらにこれにより中間体$M$と閉部分群$H$が対応するとき，
+  \begin{enumerate}
+    \item $M/K$が有限次拡大であることと$H$が$G$の開部分群であることは同値である．
+    \item $M/K$がガロア拡大であることと$H$が$G$の正規部分群であることは同値であり，このとき自然に
+  \[
+  \Gal(M/K) \cong G/H
+  \]
+  となる．
+\end{enumerate}
+
+\end{thm}
+
+\begin{proof}
+  まずLem.\ref{thm:inclusion_conti}より$\Phi$はwell-definedである．$\Psi$がwell-definedなことは明らかである．
+  次に$\Phi$と$\Psi$が互いに逆であることを示す．
+
+  $M \in \mathcal{M}$, $H=\Gal(L/M)$とする．$M \subset L^H$は明らか．$\alpha \in L^H$を任意にとる．$\beta \in L$を$\alpha$の$M$上の共役とすると，ある$\sigma \in \Gal(L/M)=H$が存在し$\sigma(\alpha)=\beta$となる．一方$\alpha \in L^H$より$\sigma(\alpha)=\alpha$だから$\beta = \alpha$となる．$\alpha$は$M$上分離的であることと合わせて，$\alpha$の$M$上の最小多項式は一次式であることがわかる．よって$\alpha \in M$となり$L^H \subset M$である．つまり$\Psi \circ \Phi= \id_{\mathcal{M}}$である．
+
+  $H \in \mathcal{H}$, $M=L^H$とする．$H \subset \Gal(L/M)$は明らか．$\sigma \in \Gal(L/M)$を任意にとる．$H$は閉だから，$\sigma$の任意の近傍が$H$と交わることを言えば十分．$\sigma$の基本開近傍$\sigma \Gal(L/N) \in \sigma S$を任意にとる（$S$の定義より$N/K$は有限次ガロア拡大）．全射準同型$G \to \Gal(N/K)$による$H$の像を$H'$とする．$N^{H'}=N \cap L^H=N \cap M$だから，有限次ガロア理論より$H'=\Gal(N/{N \cap M})$となる．すると$\sigma \in \Gal(L/M)$より$\sigma \lvert_N \in H'$，つまりある$\tau \in H$が存在して$\sigma \lvert_N =\tau \lvert_N$となる．これは$\tau \in \sigma \Gal(L/N)$と同値で，$\tau \in H$より$\sigma \Gal(L/N) \cap H \neq \emptyset$である．よって$\sigma$の任意の近傍は$H$と交わる．
+
+  以上より$\Phi$と$\Psi$は互いに逆写像である．そしてこれにより$L/K$の中間体$M$と$G$の閉部分群が対応するとする．
+
+  $M/K$が有限次拡大であることと$H$が$G$の開部分群であることが同値なのは，Lem.\ref{thm:open_subgroup}と対応関係を合わせて考えれば明らか．
+
+  $M/K$がガロア拡大だとする.特に正規拡大だから任意の$\sigma \in \Gal(L/K)=\Aut_K L=\Hom_K(L,\overline{K})$について$\sigma(M)=M$．すると任意の$\tau \in \Gal(L/M)$について$\sigma^{-1} \tau \sigma \lvert_M =\id_M$となり$\sigma^{-1} \tau \sigma \in \Gal(L/M)$，つまり$H=\Gal(L/M)$は$G=\Gal(L/K)$の正規部分群である．
+
+  逆に$H$が$G$の正規部分群だとする．$M/K$が正規拡大であることを示せばよい．Prop.\ref{thm:normal}(2)の条件を示す．$\sigma \in \Hom_K(M,\overline{K})$とし$\sigma$の$L$への延長のひとつを$\tilde{\sigma} \in \Hom_K(L,\overline{K})=\Gal(L/K)=G$とする．$H$は$G$の正規部分群だから，任意の$\tau \in H$について$\tilde{\sigma}^{-1} \tau \tilde{\sigma} \in H$．これを$\tau' \in H$とすると，任意の$\alpha \in M$について
+  \[
+  \tau(\sigma(\alpha))=\tau(\tilde{\sigma}(\alpha))=\tilde{\sigma}(\tau'(\alpha))=\tilde{\sigma}(\alpha)=\sigma(\alpha)
+  \]
+  となる（ただし左から3つ目の等号は$\alpha \in M=L^H$と$\tau' \in H$を使った）．$\tau \in H$は任意だったから，この式は$\sigma(\alpha) \in L^H$を意味する．よって$M/K$はProp.\ref{thm:normal}(2)の条件を満たすから正規拡大である．
+
+  そして$M/K$がガロア拡大のとき$\Gal(M/K) \cong G/H$となるのは，全射準同型$G \to \Gal(M/K)$に準同型定理を使えばわかる．
+\end{proof}
+
+\begin{rem}
+  Rem.\ref{thm:finite_discrete_remark}(1)より，Thm.\ref{thm:galois_theory}は有限次ガロア理論Thm.\ref{thm:finite_galois_theory}の一般化になっていることがわかる．
+\end{rem}
+
+この定理を踏まえてEx.\ref{thm:infinite_galois_example}をもう一度考察してみましょう．$L/K$をEx.\ref{thm:infinite_galois_example}のものとすると，$K_i/K$たちが全ての有限次ガロアな中間体で，有限体の拡大のガロア群は巡回群であることから
+\[
+\Gal(L/K) \cong \lim \Gal(K_i/K) \cong \lim \mathbb{Z}/l^i\mathbb{Z} \cong \mathbb{Z}_l
+\]
+となることがわかります．Frobenius準同型$\varphi$は各$\Gal(K_i/K)$の生成元だから，$\mathbb{Z}_l$においては$1$に対応します．すると$\varphi$の生成する部分群$H$は$\mathbb{Z}_l$の稠密な部分群$\mathbb{Z}$に対応し，$\sigma \in G \backslash H$は$1+l+l^2+ \dots \in \mathbb{Z}_l \backslash \mathbb{Z}$に対応します．Ex.\ref{thm:infinite_galois_example}でうまくいかなかったのは，$H \cong \mathbb{Z}$とその閉包である$G \cong \mathbb{Z}_l$が同じ不変体を定めていたからですが，これに関連して次の命題が成り立ちます．
+
+\begin{prop}
+  $L/K$をガロア拡大，$G=\Gal(L/K)$とする．
+  \begin{enumerate}
+    \item $G$の位相は任意の$\alpha \in L$に対し
+    \[
+    \rm{ev}_{\alpha} \colon G \to L,\hspace{15pt} \sigma \mapsto \sigma(\alpha)
+    \]
+    が連続となるような最弱の位相（各点収束位相）である．ただし$L$には離散位相を入れて考える．
+    \item $H$を$G$の部分群とし，$\overline{H}$をその閉包とする．このとき$L^H=L^{\overline{H}}$である．
+  \end{enumerate}
+\end{prop}
+\begin{proof}
+  \begin{enumerate}
+    \item \cite{Borceux} Lem.3.2.4を参照．
+    \item \cite{Milne} Proposision.7.10を参照．
+  \end{enumerate}
+\end{proof}
+
+つまり，気持ちとしては$H$の元の極限である\footnote{これは一般の位相空間では成り立たず，第一可算性が必要ですが，$\mathbb{Z}_l$は第一可算なので大丈夫です．}$\overline{H}$もまた$L^H$の元を固定するため，同じ不変体を与えてしまうということが起きていたわけです．
+
+最後に面白い定理をひとつ紹介します．
+\begin{thm}[Leptin]
+  任意のprofinite群に対して，それと同型なガロア群を持つガロア拡大が存在する．特に任意の有限群はガロア群として現れる．
+\end{thm}
+\begin{proof}
+ \cite{Ribes}Theorem.1.15を参照．
+\end{proof}
+
+
+\begin{thebibliography}{2}
+  \bibitem{雪江} 雪江明彦，『代数学2　環と体とガロア理論』，日本評論社，2010．
+  \bibitem{Ribes} Luis Ribes, {\sl Introduction to Profinite Groups}, Travaux mathematiques, 2013.{
+  https://wwwfr.uni.lu/content/download/75427/940970/file/Ribes.pdf
+  }
+  \bibitem{Borceux} Borceux, Janelidze, {\sl Galois Theories}, Cambridge Studies in Advanced Mathematics, 2008.
+  \bibitem{Milne} J.S.Milne, {\sl Fields and Galois Theory}, {https://www.jmilne.org/math/CourseNotes/FT421.pdf}
+\end{thebibliography}
+\end{document}
