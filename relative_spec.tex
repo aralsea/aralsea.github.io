@@ -66,11 +66,11 @@
 
 
 \begin{thm}
-  ${\cal{O}}_X$-moduleの圏${\cal{O}}_X$-Modはアーベル圏である．
+  ${\cal{O}}_X$-moduleの圏${\cal{O}}_X$-ModはAbel圏である．
 \end{thm}
 
 \begin{proof}
-  $X$上のAbel群のsheafのなすアーベル圏におけるKer,Coker,直和などが${\cal{O}}_X$-ModにおけるKer,Coker,直和になっている．
+  $X$上のAbel群のsheafのなすAbel圏におけるKer,Coker,直和などが${\cal{O}}_X$-ModにおけるKer,Coker,直和になっている．
 
 \end{proof}
 ${\cal{O}}_{X}$-moduleの基本的な例として，$X={\rm Spec}A$のとき$A$加群$M$から作られる${\cal{O}}_{X}$-module ${\tilde M}$がある．
@@ -113,16 +113,16 @@ inverseが大域切断$\psi \longmapsto \psi(X)$で与えられることを示�
 \end{proof}
 
 \begin{defi}[quasi-coherent module]
-  $X$をschemeとし，$\cal{F}$を${\cal{O}}_X$-moduleとする．全てのaffine open subscheme $U \subset X$に対して，${\cal{F}}|_U$がある${\cal{O}}_X(U)$加群$M_U$に付随する${\cal{O}}_X|_U$-moduleであるとき，$\cal{F}$はquasi-coherentであるという．以下q.c.と略す．
+  $X$をschemeとし，$\cal{F}$を${\cal{O}}_X$-moduleとする．全てのaffine open subscheme $U \subset X$に対して，${\cal{F}}|_U$がある${\cal{O}}_X(U)$加群$M_U$に付随する${\cal{O}}_X|_U$-moduleであるとき，$\cal{F}$はquasi-coherentであるという．以下q-coh.と略す．
 
 
 \end{defi}
 
-\begin{rem}\label{thm:q.c.local}
-  実は，q.c.の定義において「全てのaffine open subschemeに対して」とする代わりに「$X$のあるaffine open covering $(U_i)_i$が存在して」としても同値である\footnote{\cite{Bosch}, \S 6.8, Thm.10.}．特にaffine scheme上ではq.c.とassociated moduleの概念が一致する．
+\begin{rem}\label{thm:q-coh.local}
+  実は，q-coh.の定義において「全てのaffine open subschemeに対して」とする代わりに「$X$のあるaffine open covering $(U_i)_i$が存在して」としても同値である\footnote{\cite{Bosch}, \S 6.8, Thm.10.}．特にaffine scheme上ではq-coh.とassociated moduleの概念が一致する．
 \end{rem}
 \begin{rem}
-  $\cal{F}$がq.c. ${\cal{O}}_X$-moduleで，$U={\rm Spec}A \subset X$がaffine open subschemeなら，$f \in A$に対し
+  $\cal{F}$がq-coh. ${\cal{O}}_X$-moduleで，$U={\rm Spec}A \subset X$がaffine open subschemeなら，$f \in A$に対し
   \[
     {\cal{F}}(D(f))={\cal{F}}(U)_f
   \]
@@ -189,7 +189,7 @@ inverseが大域切断$\psi \longmapsto \psi(X)$で与えられることを示�
 \begin{defi}[${\cal{O}}_X$-moduleの順像，逆像]
   $X$,$Y$をschemeとし，$f:X \longrightarrow Y$をschemeの射，$\cal{F}$,$\cal{G}$をそれぞれ${\cal{O}}_X,{\cal{O}}_Y$-moduleとする．${\cal{F}}$の$f$による順像(direct image)とは，Abel群のsheafとしての順像$f_*{{\cal{F}}}$のことである．また，${\cal{G}}$の$f$による逆像(inverse image)とは{\rm Prop.\ref{thm:inverse}}で構成した$f^*{\cal{G}}$のことと定める．
 \end{defi}
-次の命題より，affineな場合順像，逆像は係数制限，係数拡大によってかけることがわかる．特にq.c.が逆像で保たれることに注意する．
+次の命題より，affineな場合順像，逆像は係数制限，係数拡大によってかけることがわかる．特にq-coh.が逆像で保たれることに注意する．
 \begin{prop}\label{thm:associated}
   $X={\rm Spec}{A},Y={\rm Spec}{B}$をaffine scheme，$f:X \to Y$を$\sigma:B \to A$に対応する射とする．また，$F$を$A$加群，$G$を$B$加群とする．このとき
   \[
@@ -218,15 +218,15 @@ inverseが大域切断$\psi \longmapsto \psi(X)$で与えられることを示�
   \]
   が成り立つ．よって米田の補題より$f^*({\tilde G})={\widetilde {G \otimes_B A}}$である．
 \end{proof}
-\begin{cor}\label{thm:invese_q.c.}
-  $f:X\to Y$をschemeの射とし，$\cal{G}$をq.c. ${\cal{O}}_Y$-moduleとする．このとき$f^*{\cal{G}}$はq.c. ${\cal{O}}_X$-moduleである．
+\begin{cor}\label{thm:invese_q-coh.}
+  $f:X\to Y$をschemeの射とし，$\cal{G}$をq-coh. ${\cal{O}}_Y$-moduleとする．このとき$f^*{\cal{G}}$はq-coh. ${\cal{O}}_X$-moduleである．
 \end{cor}
 \begin{proof}
   $Y$のaffine open subscheme $V$に対し，$f(U) \subset V$となるような$X$のaffine open subscheme $U$をとる．このとき$f^*$の構成より
   \[
     (f^*({\cal{G}}))|_U=f^*({\cal{G}}|_V)
   \]
-  である．そしてこのような$U,V$を全て考えると$U$たちは$X$を覆う．よってProp.\ref{thm:associated}とRem.\ref{thm:q.c.local}より$f^*({\cal{G}})$はq.c.である．
+  である．そしてこのような$U,V$を全て考えると$U$たちは$X$を覆う．よってProp.\ref{thm:associated}とRem.\ref{thm:q-coh.local}より$f^*({\cal{G}})$はq-coh.である．
 
 \end{proof}
 
@@ -253,23 +253,23 @@ inverseが大域切断$\psi \longmapsto \psi(X)$で与えられることを示�
 
   つまり各開集合$U \subset X$について${\cal{A}}(U) \to {\cal{B}}(U)$が${{\cal{O}}_X}(U)$代数の射となるようなもののことである．
 \end{defi}
-${\cal{O}}_X$-algebraに対してもq.c.が定義される．
+${\cal{O}}_X$-algebraに対してもq-coh.が定義される．
 \begin{defi}[quasi-coherent algebra]
-  $(X,{\cal{O}}_X)$をschemeとする．quasi-coherent ${\cal{O}}_X$-algebraとは，${\cal{O}}_X$-moduleとしてq.c.な${\cal{O}}_X$-algebraのことである．
+  $(X,{\cal{O}}_X)$をschemeとする．quasi-coherent ${\cal{O}}_X$-algebraとは，${\cal{O}}_X$-moduleとしてq-coh.な${\cal{O}}_X$-algebraのことである．
 
 \end{defi}
 
-\begin{ex}[q.c. polynomial algebra]
+\begin{ex}[q-coh. polynomial algebra]
   $S$をschemeとする．このとき環のpresheaf
   \[
     U \longmapsto {\cal{O}}_S(U)[t_1,\dots ,t_n]
   \]
-  のsheafificationを${\cal{O}}_S[t_1,\dots ,t_n]$と書く．これはq.c. ${\cal{O}}_S$-algebraである．実際$U \subset S$をaffine openとすると，$U$に制限すればpresheafの時点で${\widetilde{{\cal{O}}_S(U)}}$と同型である．
+  のsheafificationを${\cal{O}}_S[t_1,\dots ,t_n]$と書く．これはq-coh. ${\cal{O}}_S$-algebraである．実際$U \subset S$をaffine openとすると，$U$に制限すればpresheafの時点で${\widetilde{{\cal{O}}_S(U)}}$と同型である．
 \end{ex}
 
-ここまでの準備のもとで，q.c. ${\cal{O}}_S$-algebra $\cal{A}$のrelative spectrum ${\rm Spec}{\cal{A}}$を構成する．モチベーションは，「${\cal{A}}$に近い」structure sheafをもつ自然な$S$-schemeを定義したいというものである．そこで$S$のaffine open subscheme $U$について${\rm Spec}{\cal{A}}(U)$を考え，sheafの制限射に対応するaffine schemeの射を使って${\rm Spec}{\cal{A}}(U)$たちを貼り合わせる，といった感じのことをする．
+ここまでの準備のもとで，q-coh. ${\cal{O}}_S$-algebra $\cal{A}$のrelative spectrum ${\rm Spec}{\cal{A}}$を構成する．モチベーションは，「${\cal{A}}$に近い」structure sheafをもつ自然な$S$-schemeを定義したいというものである．そこで$S$のaffine open subscheme $U$について${\rm Spec}{\cal{A}}(U)$を考え，sheafの制限射に対応するaffine schemeの射を使って${\rm Spec}{\cal{A}}(U)$たちを貼り合わせる，といった感じのことをする．
 \begin{thm}[relative spectrum]\label{thm:glueing}
-  $S$をscheme，$(U_i)_i$を$S$のaffine open covering，$\cal{A}$をq.c. ${\cal{O}}_S$-algebraとする．
+  $S$をscheme，$(U_i)_i$を$S$のaffine open covering，$\cal{A}$をq-coh. ${\cal{O}}_S$-algebraとする．
 
   \[
     \pi_i:X_i={\rm Spec}{\cal{A}}(U_i) \longrightarrow U_i
@@ -289,7 +289,7 @@ ${\cal{O}}_X$-algebraに対してもq.c.が定義される．
   \[
     U_i \cap U_j=\bigcup_{\lambda}U_{ij\lambda}
   \]
-  となるような$S$の開集合族$(U_{ij\lambda})_\lamda$が取れる．\footnote{\cite{Gortz}, Lem.3.3より．}$g \in {\cal{O}}_S(U_i)$によって$U_{ij\lambda}=D(g) \subset U_i$とかけているとする．$\cal{A}$がq.c.だから${\cal{A}}(U_i)_g={\cal{A}}(U_{ij\lambda})$が成り立つ．よって
+  となるような$S$の開集合族$(U_{ij\lambda})_\lamda$が取れる．\footnote{\cite{Gortz}, Lem.3.3より．}$g \in {\cal{O}}_S(U_i)$によって$U_{ij\lambda}=D(g) \subset U_i$とかけているとする．$\cal{A}$がq-coh.だから${\cal{A}}(U_i)_g={\cal{A}}(U_{ij\lambda})$が成り立つ．よって
   \[
   \pi_{i}^{-1}(U_{ij \lambda})=D(\sigma_i(g))\cong {\rm Spec}{\cal{A}}(U_i)_g={\rm Spec}{\cal{A}}(U_{ij\lambda})
   \]
@@ -353,7 +353,7 @@ ${\cal{O}}_X$-algebraに対してもq.c.が定義される．
 \end{proof}
 
 \begin{thm}\label{thm:univ}
-  $S$-scheme $q:Y\to S$とq.c. ${\cal{O}}_S$-algebra $\cal{A}$に対し,自然同型
+  $S$-scheme $q:Y\to S$とq-coh. ${\cal{O}}_S$-algebra $\cal{A}$に対し,自然同型
   \[
     {\rm Hom}_{S}(Y,{\rm Spec}{\cal{A}}) \xrightarrow{\sim} {\rm Hom}_{{\cal{O}}_S}({\cal{A}},q_*{{\cal{O}}_Y})
   \]
@@ -416,7 +416,7 @@ ${\cal{O}}_X$-algebraに対してもq.c.が定義される．
     \draw (x) -- node {$q$} (b);
   \end{tikzpicture}
 \]
-により$S$-schemeの射$f_i$ができる．$\cal{A}$がq.c.であることを使うとこれらの$f_i$は貼り合って$S$-schemeの射$f:Y \to {\rm Spec}{\cal{A}}$を定めることがわかる．これがinverseを与えることが計算により確かめられる．自然性は明らか．
+により$S$-schemeの射$f_i$ができる．$\cal{A}$がq-coh.であることを使うとこれらの$f_i$は貼り合って$S$-schemeの射$f:Y \to {\rm Spec}{\cal{A}}$を定めることがわかる．これがinverseを与えることが計算により確かめられる．自然性は明らか．
 \end{proof}
 \begin{rem}
   {\rm Thm.\ref{thm:univ}}と米田の補題により，${\rm Spec}{\cal{A}}$は$S$のaffine open covering $(U_i)_i$の取り方によらず定まる．特に$S={\rm SpecR}$がaffine scheme，$R\to A$が$R$代数で${\cal{A}}={\tilde A}$の時
@@ -426,7 +426,7 @@ ${\cal{O}}_X$-algebraに対してもq.c.が定義される．
   である．
 \end{rem}
 \begin{ex}[affine $n$-space]
-  $S$をschemeとする．q.c. ${\cal{O}}_S$-algebra ${\cal{O}}_S[t_1,\dots ,t_n]$に対し
+  $S$をschemeとする．q-coh. ${\cal{O}}_S$-algebra ${\cal{O}}_S[t_1,\dots ,t_n]$に対し
   \[
   \mathbb{A}^n_S={\rm Spec}{{\cal{O}}_S[t_1,\dots ,t_n]}
   \]
@@ -438,7 +438,7 @@ ${\cal{O}}_X$-algebraに対してもq.c.が定義される．
 \section{{\it relative spectrum}と表現可能関手}
 この章では，relative spectrumをある関手のrepresenting objectとして特徴付ける（\cite{stacks_project}も参照）．またそれを利用したfiber productの計算の一例を挙げる．
 \begin{defi}\label{thm:functor_F}
-  scheme $S$とq.c. ${\cal{O}}_S$-algebra $\cal{A}$に対し関手$F=F_{(S,{\cal{A}})}:{\bf Sch}^{op} \to {\bf Set}$を，対象については
+  scheme $S$とq-coh. ${\cal{O}}_S$-algebra $\cal{A}$に対し関手$F=F_{(S,{\cal{A}})}:{\bf Sch}^{op} \to {\bf Set}$を，対象については
   \[
     Y \longmapsto F(Y)=\{(q,\varphi)|\mbox{$q:Y \to S$はschemeの射，$\varphi:{\cal{A}} \to q_*{\cal{O}}_Y$は${\cal{O}}_S$-algebraの射}\}
   \]
@@ -460,7 +460,7 @@ ${\cal{O}}_X$-algebraに対してもq.c.が定義される．
   また，$(q.\varphi) \in F(Y)$をThm.\ref{thm:univ}によって$\varphi$に対応する射$f:Y \to {\rm Spec}{\cal{A}}$に送ることにより写像$F(Y) \to {\rm Hom}_{\bf Sch}(Y,{\rm Spec}{\cal{A}})$を定める．これらが互いにinverseであることがThm.\ref{thm:univ}によりわかる．自然性も簡単に確かめられる．
 \end{proof}
 \begin{prop}\label{thm:pullback}
-  $S,S'$をscheme，$g:S' \to S$をschemeの射とし，$\cal{A}$をq.c. ${\cal{O}}_S$-algebra，${\cal{A'}}=g^*{\cal{A}}$とする（これは{\rm Cor.\ref{thm:invese_q.c.}}によりq.c. ${\cal{O}}_{S'}$-algebraである）．また$F':{\bf Sch}^{op} \to {\bf Set}$を$(S',{\caL{A'}})$に対応する{\rm Def.\ref{thm:functor_F}}の関手とする．このとき図式
+  $S,S'$をscheme，$g:S' \to S$をschemeの射とし，$\cal{A}$をq-coh. ${\cal{O}}_S$-algebra，${\cal{A'}}=g^*{\cal{A}}$とする（これは{\rm Cor.\ref{thm:invese_q-coh.}}によりq-coh. ${\cal{O}}_{S'}$-algebraである）．また$F':{\bf Sch}^{op} \to {\bf Set}$を$(S',{\caL{A'}})$に対応する{\rm Def.\ref{thm:functor_F}}の関手とする．このとき図式
   \[
     \begin{tikzpicture}[auto,->]
       \node (a) at (0,1.2) {$F'$}; \node (x) at (1.8,1.2) {$F$};
@@ -505,7 +505,7 @@ ${\cal{O}}_X$-algebraに対してもq.c.が定義される．
   であることからわかる．
 \end{proof}
 \begin{cor}
-  $S,S'$をscheme，$g:S' \to S$をschemeの射とし，$\cal{A}$をq.c. ${\cal{O}}_S$-algebra，${\cal{A'}}=g^*{\cal{A}}$とする.このとき
+  $S,S'$をscheme，$g:S' \to S$をschemeの射とし，$\cal{A}$をq-coh. ${\cal{O}}_S$-algebra，${\cal{A'}}=g^*{\cal{A}}$とする.このとき
   \[
   {\rm Spec}{\cal{A'}}={\rm Spec}{\cal{A}}\times_S S'
   \]
@@ -530,7 +530,7 @@ ${\cal{O}}_X$-algebraに対してもq.c.が定義される．
   $g^*{{\cal{O}}_S[t_1,\dots ,t_n]}={{\cal{O}}_{S'}[t_1,\dots ,t_n]}$を示せば良い．$t$によって$n$個の変数$(t_1,\dots,t_n)$をまとめて略記する．
 
   $U={\rm Spec}B \subset S$,
-  $U'={\rm Spec}A \subset g^{-1}(U) \subset S'$をそれぞれaffine openとし，$g:U' \to U$に対応する環の射を$\sigma:B \to A$とする．このときq.c.とProp.\ref{thm:associated}より
+  $U'={\rm Spec}A \subset g^{-1}(U) \subset S'$をそれぞれaffine openとし，$g:U' \to U$に対応する環の射を$\sigma:B \to A$とする．このときq-coh.とProp.\ref{thm:associated}より
   \[
   (g^*{\cal{O}}_S[t])|_{U'}=g^*({\cal{O}}_S[t]|_U)={\widetilde {B[t] \otimes_B A}}\cong {\widetilde{A[t]}}={\cal{O}}_{S'}[t]|_{U'}
   \]
